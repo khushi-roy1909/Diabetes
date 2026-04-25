@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="main-card">
+            <div class="left-section">
+                <h1>Diabetes Prediction System</h1>
+                <p class="tagline">AI and Machine Learning based smart health prediction platform</p>
+
+                <div class="info-boxes">
+                    <div class="info-box">
+                        <h3>Model Accuracy</h3>
+                        <p>{{ accuracy }}%</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>Algorithm Used</h3>
+                        <p>Random Forest</p>
+                    </div>
+                </div>
+
+                <p class="description">
+                    Enter the patient medical details to predict the probability of diabetes.
+                </p>
+
+                <form method="POST" class="prediction-form" onsubmit="return validateForm()">
+                    <div class="input-grid">
+                        <input type="number" step="any" id="pregnancies" name="pregnancies" placeholder="Pregnancies" required>
+                        <input type="number" step="any" id="glucose" name="glucose" placeholder="Glucose" required>
+                        <input type="number" step="any" id="bloodpressure" name="bloodpressure" placeholder="Blood Pressure" required>
+                        <input type="number" step="any" id="skinthickness" name="skinthickness" placeholder="Skin Thickness" required>
+                        <input type="number" step="any" id="insulin" name="insulin" placeholder="Insulin" required>
+                        <input type="number" step="any" id="bmi" name="bmi" placeholder="BMI" required>
+                        <input type="number" step="any" id="dpf" name="dpf" placeholder="Diabetes Pedigree Function" required>
+                        <input type="number" step="any" id="age" name="age" placeholder="Age" required>
+                    </div>
+
+                    <button type="submit">Predict Now</button>
+                </form>
+
+                {% if prediction_text %}
+                <div class="result-box">
+                    <h2>{{ prediction_text }}</h2>
+                    {% if probability is not none %}
+                    <p>Prediction Probability: <span>{{ probability }}%</span></p>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+
+         <div class="right-section">
+
+    <div class="illustration-card">
+        <img src="{{ url_for('static', filename='Diab.webp') }}" class="main-img">
+    </div>
+
+    <div class="info-card">
+        <h3>What is Diabetes?</h3>
+        <p>
+            Diabetes is a chronic condition where the body is unable to properly
+            regulate blood sugar levels due to lack of insulin or insulin resistance.
+        </p>
+
+        <h4>Common Symptoms</h4>
+        <ul>
+            <li>Frequent urination</li>
+            <li>Increased thirst</li>
+            <li>Fatigue</li>
+            <li>Blurred vision</li>
+        </ul>
+
+        <h4>Prevention Tips</h4>
+        <ul>
+            <li>Maintain healthy diet</li>
+            <li>Exercise regularly</li>
+            <li>Monitor blood sugar</li>
+            <li>Avoid excessive sugar intake</li>
+        </ul>
+    </div>
+
+</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
